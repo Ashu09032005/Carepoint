@@ -1,94 +1,320 @@
-/* Global Styling */
-body {
-  font-family: 'Poppins', sans-serif;
-  background: linear-gradient(to right, #4facfe, #00f2fe);
-  color: #333;
+/* === Global Reset === */
+* {
   margin: 0;
   padding: 0;
-  min-height: 100vh;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* === Page Background & Layout === */
+body {
+  background: linear-gradient(to bottom, #0a2540, #1e3a8a);
   display: flex;
   flex-direction: column;
-}
-
-/* Navbar */
-.navbar {
-  display: flex;
   align-items: center;
-  justify-content: space-between;
-  background: #004aad;
-  padding: 15px 30px;
-  color: white;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  min-height: 100vh;
 }
 
-.navbar .logo-space {
-  height: 80px;
-  line-height: 50px;
-  color: #004aad;
-
-}
-.navbar .logo{
-  height: 80px;
-}
-
-.navbar .nav-links {
+/* === Home Wrapper === */
+.home-wrapper {
+  width: 100vw;
   display: flex;
-  gap: 20px;
+  flex-direction: column;
+  align-items: center;
 }
 
-.navbar a {
+/* === Navbar === */
+.navbar {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #0a2540;
+  padding: 15px 40px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.logo-space img {
+  width: 140px;
+  height: auto;
+}
+
+.nav-links {
+  display: flex;
+  gap: 25px;
+}
+
+.nav-links a {
   color: white;
   text-decoration: none;
-  font-size: 16px;
-  transition: 0.3s ease-in-out;
+  font-size: 18px;
+  font-weight: 500;
+  transition: all 0.3s ease;
 }
 
-.navbar a:hover {
+.nav-links a:hover {
+  color: #4fc3f7;
+  transform: scale(1.05);
+}
+
+.home-container {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 300px; 
+  width: 600px;
+  background: #0a2540;
+  color: white;
+  border-radius: 12px;
+  padding: 40px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+.home-title {
+  font-size: 34px;
+  font-weight: 700;
+  color: #c7ef37;
+  margin-bottom: 150px;
+}
+
+.home-description {
+  font-size: 18px;
+  max-width: 80%;
+  margin-bottom: 100px;
+  margin-left: 45px;
+}
+
+/* Button container */
+.button-group {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  right: 0;
+  padding: 0 30px;
+}
+
+/* Button Styling */
+.primary-btn, .secondary-btn {
+  width: 45%;
+  padding: 12px 0;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+/* "I'm a Student" Button */
+.primary-btn {
+  background: #1d4ed8;
+  color: white;
+  border-color: white;
+  border-style:solid;
+}
+
+.primary-btn:hover {
+  background: transparent
+  
+}
+
+/* "Download Reports" Button */
+.secondary-btn {
+  background: #1d4ed8;
+  color: white;
+  border-color: white;
+  border-style:solid;
+}
+
+.secondary-btn:hover {
+  background: transparent;
+}
+
+
+.footer {
+  width: 100%;
+  background: #0a2540;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  margin-top: 40px;
+  position: fixed;
+  bottom: 0;
+}
+
+.footer-link {
+  color: #4fc3f7;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.footer-link:hover {
   text-decoration: underline;
 }
 
-/* Centered Container */
-.container {
-  width: 69%;
-  max-width: 500px;
-  margin: 100px auto;
+.Form-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(to right, #0a2540, #1d4e89);
   padding: 20px;
-  background: white;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 100vw;
 }
 
-/* Buttons */
-button {
-  width: 100px;
-  padding: 12px;
-  font-size: 16px;
-  background: #007bff;
+
+.form-title {
+  font-size: 28px;
+  font-weight: bold;
   color: white;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+
+form {
+  background: #bfdbfe;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+
+input, select, textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: border-color 0.3s ease-in-out;
+  background-color: #ffeeee;
+}
+
+
+input:focus, select:focus, textarea:focus {
+  border-color: #1d4e89;
+  outline: none;
+  box-shadow: 0px 0px 8px rgba(29, 78, 137, 0.3);
+}
+
+
+select {
+  background: #ffeeee;
+}
+
+
+textarea {
+  resize: none;
+  height: 80px;
+}
+
+
+input[type="file"] {
   border: none;
-  border-radius: 6px;
+}
+
+
+button {
+  background: #1d4e89;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
   cursor: pointer;
-  transition: 0.3s ease-in-out;
-  margin-bottom: 10px;
+  transition: background 0.3s;
 }
 
 button:hover {
-  background: #0056b3;
+  background: #163a63;
 }
 
-/* Footer */
-.footer {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  background: #004aad;
+
+@media (max-width: 500px) {
+  form {
+    width: 90%;
+  }
+}
+.Report{
+  margin-top: 50px;
+  background: transparent;
+  width: 400px;
+}
+.selection{
+  margin-top: 40px;
+}
+.btn-fetch{
+  margin-top:40px;
+}
+.val{
+  margin-top: 40px;
+}
+.Heading{
   color: white;
-  text-align: center;
-  padding: 10px 0;
-  font-size: 14px;
-  bottom: 0;
+}
+.Login{
+  margin-top:40px;
+}
+.Login-Title{
+  margin-bottom: 15px;
+  color: white;
+}
+.acc{
+  margin-top: 15px;
+  color: white;
 }
 
+.signup-link {
+  color: #ffcc00; 
+  font-weight: bold;
+  text-decoration: none;
+  transition: 0.3s ease-in-out;
+}
 
-
-
+.signup-link:hover {
+  text-decoration: underline;
+  color: #ffd71f; 
+}
+.Signup{
+  margin-top: 40px;
+}
+.Signup-Heading{
+  margin-bottom: 15px;
+  color: white;
+}
+.Report-Data{
+  margin-top: 15px;
+  margin-bottom: 35px;
+  color: white;
+}
+.Report-Heading{
+  color: white;
+}
+.Pdf{
+  margin-right: 10px;
+}
+.Excel{
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.Docx{
+  margin-left: 10px;
+}
+.Download{
+  margin-top: 15px;
+  color: white;
+  margin-bottom: 15px;
+}
+.Download-Heading{
+  margin-bottom: 15px;
+}
