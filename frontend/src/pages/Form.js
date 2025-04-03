@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
-import "../style.css";
 function Form() {
   const [formData, setFormData] = useState({
     regNo: "",
@@ -60,8 +59,8 @@ function Form() {
           <a href="/contact">Contact</a>
         </div>
       </nav>
-    <div>
-      <h2>Student Maintenance Form</h2>
+    <div className="Form-div">
+      <div className="form-title">Student Maintenance Form</div>
       <form onSubmit={handleSubmit}>
         <input name="regNo" value={formData.regNo} placeholder="Registration Number" onChange={handleChange} required />
         <input name="name" value={formData.name} placeholder="Name" onChange={handleChange} required />
@@ -86,9 +85,10 @@ function Form() {
         <button type="submit">Submit</button>
       </form>
     </div>
-    <footer className="footer">
-        &copy; 2025 Care Point™ | All Rights Reserved | Contact: support@carepoint.com
-      </footer>
+    <footer className="footer"><p>
+      &copy; 2025 Care Point™ | All Rights Reserved | Contact:{" "}
+      <a href="mailto:support@carepoint.com" className="footer-link">support@carepoint.com</a>
+      </p></footer>
     </>
   );
 }

@@ -48,7 +48,7 @@ const AdminReports = () => {
     
 
     return (
-        <>
+        <div className="home-wrapper">
             <nav className="navbar">
                 <div className="logo-space">
                     <img src="/logo1.png" alt="Care Point Logo" className="logo" width={150} height={100} />
@@ -60,15 +60,15 @@ const AdminReports = () => {
                     <a href="/contact">Contact</a>
                 </div>
             </nav>
-            <div>
-                <h2>Download Reports</h2>
-                <select value={reportType} onChange={(e) => setReportType(e.target.value)}>
+            <div className="Report">
+                <h2 className="Heading">Download Reports</h2>
+                <select className="selection" value={reportType} onChange={(e) => setReportType(e.target.value)}>
                     <option value="student-wise">Student-wise</option>
                     <option value="monthly">Monthly</option>
                     <option value="weekly">Weekly</option>
                     <option value="work-type">Type of Work</option>
                 </select>
-
+                <div className="val">
                 {reportType === "student-wise" && (
                     <input type="text" placeholder="Enter Student Name" value={value} onChange={(e) => setValue(e.target.value)} />
                 )}
@@ -81,24 +81,29 @@ const AdminReports = () => {
                 {reportType === "work-type" && (
                     <input type="text" placeholder="Enter Work Type" value={value} onChange={(e) => setValue(e.target.value)} />
                 )}
+                </div>
 
-                <button onClick={fetchReports}>Fetch Reports</button>
+                <button className="btn-fetch" onClick={fetchReports}>Fetch Reports</button>
 
                 {canDownload && (
-                    <>
-                        <h3>Download as:</h3>
-                        <button onClick={() => downloadReport("pdf")}>PDF</button>
-                        <button onClick={() => downloadReport("xlsx")}>Excel</button>
-                        <button onClick={() => downloadReport("docx")}>DOCX</button>
-                    </>
+                    <div className="Download">
+                        <h3 className="Download-Heading">Download as:</h3>
+                        <button className="Pdf" onClick={() => downloadReport("pdf")}>PDF</button>
+                        <button className="Excel" onClick={() => downloadReport("xlsx")}>Excel</button>
+                        <button className="Docx" onClick={() => downloadReport("docx")}>Docx</button>
+                    </div>
                 )}
 
-                <div>
-                    <h3>Report Data:</h3>
+                <div className="Report-Data">
+                    <h3 className="Report-Heading">Report Data:</h3>
                     <pre>{JSON.stringify(reports, null, 2)}</pre>
                 </div>
             </div>
-        </>
+            <footer className="footer"><p>
+      &copy; 2025 Care Point™ | All Rights Reserved | Contact:{" "}
+      <a href="mailto:support@carepoint.com" className="footer-link">support@carepoint.com</a>
+      </p></footer>
+        </div>
     );
 };
 

@@ -29,7 +29,7 @@ db.connect((err) => {
     console.log("Connected to MySQL database");
 });
 
-// Signup API
+
 app.post("/signup", async (req, res) => {
     const { name, regNo, phone, email, password } = req.body;
     if (!name || !regNo || !phone || !email || !password) {
@@ -70,7 +70,7 @@ const upload=multer({
     fileFilter : fileFilter,
 });
 
-// Login API
+
 app.post("/login", (req, res) => {
     const { regNo, password } = req.body;
     if (!regNo || !password) {
@@ -90,7 +90,7 @@ app.post("/login", (req, res) => {
     });
 });
 
-// Fetch user requests API
+
 app.get("/user-requests/:regNo",(req, res) => {
     const { regNo } = req.params;
     db.query("SELECT * FROM maintenance_requests WHERE regNo = ?", [regNo], (err, results) => {
@@ -102,7 +102,7 @@ app.get("/user-requests/:regNo",(req, res) => {
     });
 });
 app.post("/submit-request", upload.single("proof"),(req, res) => {
-    console.log("File received:", req.file); // Debugging
+    console.log("File received:", req.file); 
     console.log("Form Data received:", req.body);
 
     if (!req.file) {
@@ -146,7 +146,7 @@ app.post("/get-reports", (req, res) => {
     });
 });
 
-// 📌 Generate PDF Report
+
 app.post("/download/pdf", (req, res) => {
     const { reports } = req.body;
 
@@ -175,7 +175,7 @@ app.post("/download/pdf", (req, res) => {
 
 
 
-// 📌 Generate Excel Report
+
 app.post("/download/xlsx", async (req, res) => {
     const { reports } = req.body;
 
@@ -214,7 +214,6 @@ app.post("/download/xlsx", async (req, res) => {
 
 
 
-// 📌 Generate DOCX Report
 app.post("/download/docx", async (req, res) => {
     const { reports } = req.body;
 
@@ -255,7 +254,7 @@ app.post("/download/docx", async (req, res) => {
 
 
 
-// Start the Server
+
 app.listen(5000, () => {
     console.log("Server running on port 5000");
 });

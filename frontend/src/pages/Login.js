@@ -26,7 +26,7 @@ function Login() {
   };
 
   return (
-    <>
+    <div className="home-wrapper">
     <nav className="navbar">
         <div className="logo-space"><img src="/logo1.png" alt="Care Point Logo" className="logo" width={150} height={100}/></div>
         <div className="nav-links">
@@ -36,16 +36,20 @@ function Login() {
           <a href="/contact">Contact</a>
         </div>
       </nav>
-    <div>
-      <h2>Login</h2>
+    <div className="Login">
+      <h2 className="Login-Title">Login</h2>
       <form onSubmit={handleLogin}>
         <input type="text" placeholder="Reg No" value={regNo} onChange={(e) => setRegNo(e.target.value)} required />
         <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
         <button type="submit">Login</button>
       </form>
-      <p>Don't have an account? <a href="Signup">Sign Up</a></p>
+      <p className="acc">Don't have an account? <a className="signup-link" href="Signup">Sign Up</a></p>
     </div>
-    </>
+    <footer className="footer"><p>
+      &copy; 2025 Care Point™ | All Rights Reserved | Contact:{" "}
+      <a href="mailto:support@carepoint.com" className="footer-link">support@carepoint.com</a>
+      </p></footer>
+    </div>
   );
 }
 
