@@ -1,320 +1,282 @@
-/* === Global Reset === */
+/* ================= GLOBAL RESET ================= */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
-/* === Page Background & Layout === */
-body {
-  background: linear-gradient(to bottom, #0a2540, #1e3a8a);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+html, body {
+  height: 100%;
+  background: linear-gradient(135deg, #0a2540, #1e3a8a);
+  color: #fff;
+}
+
+/* ================= LAYOUT ================= */
+.home-wrapper,
+.page {
   min-height: 100vh;
-}
-
-/* === Home Wrapper === */
-.home-wrapper {
-  width: 100vw;
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 
-/* === Navbar === */
+/* ================= NAVBAR ================= */
 .navbar {
+  height: 72px;
   width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   background: #0a2540;
-  padding: 15px 40px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.35);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 .logo-space img {
-  width: 140px;
-  height: auto;
+  height: 48px;
 }
 
 .nav-links {
   display: flex;
-  gap: 25px;
+  align-items: center;
+  gap: 24px;
 }
 
 .nav-links a {
-  color: white;
+  color: #e5e7eb;
   text-decoration: none;
-  font-size: 18px;
+  font-size: 15px;
   font-weight: 500;
-  transition: all 0.3s ease;
+  transition: 0.3s;
 }
 
 .nav-links a:hover {
   color: #4fc3f7;
-  transform: scale(1.05);
 }
 
-.home-container {
-  margin-top: 40px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  height: 300px; 
-  width: 600px;
-  background: #0a2540;
+.logout-btn {
+  background: #ef4444;
+  border: none;
   color: white;
-  border-radius: 12px;
-  padding: 40px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-  position: relative;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
 }
+
+.logout-btn:hover {
+  background: #dc2626;
+}
+
+/* ================= HOME PAGE ================= */
+.home-container {
+  margin: auto;
+  width: 640px;
+  background: #0a2540;
+  padding: 48px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+}
+
 .home-title {
-  font-size: 34px;
+  font-size: 36px;
   font-weight: 700;
   color: #c7ef37;
-  margin-bottom: 150px;
+  margin-bottom: 16px;
 }
 
 .home-description {
   font-size: 18px;
-  max-width: 80%;
-  margin-bottom: 100px;
-  margin-left: 45px;
+  color: #d1d5db;
+  margin-bottom: 36px;
 }
 
-/* Button container */
+/* Buttons */
 .button-group {
-  width: 100%;
   display: flex;
-  justify-content: space-between;
-  position: absolute;
-  bottom: 10px;
-  left: 0;
-  right: 0;
-  padding: 0 30px;
+  gap: 20px;
 }
 
-/* Button Styling */
-.primary-btn, .secondary-btn {
-  width: 45%;
-  padding: 12px 0;
-  font-size: 16px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-}
-
-/* "I'm a Student" Button */
-.primary-btn {
-  background: #1d4ed8;
-  color: white;
-  border-color: white;
-  border-style:solid;
-}
-
-.primary-btn:hover {
-  background: transparent
-  
-}
-
-/* "Download Reports" Button */
+.primary-btn,
 .secondary-btn {
+  flex: 1;
+  padding: 14px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 2px solid #fff;
   background: #1d4ed8;
-  color: white;
-  border-color: white;
-  border-style:solid;
+  color: #fff;
+  transition: 0.3s;
 }
 
+.primary-btn:hover,
 .secondary-btn:hover {
   background: transparent;
 }
 
+/* ================= AUTH & FORMS ================= */
+.Login,
+.Signup,
+.Form-div {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px;
+}
 
-.footer {
-  width: 100%;
-  background: #0a2540;
-  color: white;
+.form-title,
+.Login h2,
+.Signup h2 {
+  font-size: 26px;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+form {
+  width: 480px;
+  background: #bfdbfe;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  color: #000;
+}
+
+input,
+select,
+textarea {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  font-size: 15px;
+  background: #f8fafc;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: #1d4ed8;
+  box-shadow: 0 0 0 3px rgba(29,78,216,0.2);
+}
+
+textarea {
+  resize: none;
+  height: 90px;
+}
+
+button[type="submit"] {
+  background: #1d4ed8;
+  color: #fff;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover {
+  background: #163a63;
+}
+
+/* ================= REPORTS ================= */
+.reports-container {
+  flex: 1;
+  padding: 40px;
   text-align: center;
-  padding: 20px;
-  margin-top: 40px;
-  position: fixed;
-  bottom: 0;
+}
+
+.Heading {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.Download {
+  margin-bottom: 20px;
+}
+
+.Download button {
+  margin: 0 8px;
+}
+
+/* Table */
+.report-table {
+  width: 95%;
+  margin: 0 auto;
+  border-collapse: collapse;
+  background: #fff;
+  color: #000;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.report-table th {
+  background: #0a2540;
+  color: #fff;
+  padding: 12px;
+}
+
+.report-table td {
+  padding: 10px;
+  border-bottom: 1px solid #e5e7eb;
+  font-size: 14px;
+}
+
+.report-table tr:hover {
+  background: #f1f5f9;
+}
+
+.report-table a {
+  color: #2563eb;
+  font-weight: 500;
+}
+
+/* ================= FOOTER ================= */
+.footer {
+  background: #0a2540;
+  color: #d1d5db;
+  text-align: center;
+  padding: 14px;
+  font-size: 14px;
 }
 
 .footer-link {
-  color: #4fc3f7;
+  color: #4fd1ff;
   text-decoration: none;
-  font-weight: bold;
 }
 
 .footer-link:hover {
   text-decoration: underline;
 }
 
-.Form-div {
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+  .home-container,
+  form {
+    width: 95%;
+  }
+
+  .button-group {
+    flex-direction: column;
+  }
+
+  .nav-links {
+    gap: 14px;
+  }
+  .main-content {
+  flex: 1;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
-  background: linear-gradient(to right, #0a2540, #1d4e89);
-  padding: 20px;
-  width: 100vw;
 }
 
-
-.form-title {
-  font-size: 28px;
-  font-weight: bold;
-  color: white;
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-
-form {
-  background: #bfdbfe;
-  padding: 30px;
-  border-radius: 8px;
-  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
-  width: 500px;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-
-input, select, textarea {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 16px;
-  transition: border-color 0.3s ease-in-out;
-  background-color: #ffeeee;
-}
-
-
-input:focus, select:focus, textarea:focus {
-  border-color: #1d4e89;
-  outline: none;
-  box-shadow: 0px 0px 8px rgba(29, 78, 137, 0.3);
-}
-
-
-select {
-  background: #ffeeee;
-}
-
-
-textarea {
-  resize: none;
-  height: 80px;
-}
-
-
-input[type="file"] {
-  border: none;
-}
-
-
-button {
-  background: #1d4e89;
-  color: white;
-  padding: 12px;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-button:hover {
-  background: #163a63;
-}
-
-
-@media (max-width: 500px) {
-  form {
-    width: 90%;
-  }
-}
-.Report{
-  margin-top: 50px;
-  background: transparent;
-  width: 400px;
-}
-.selection{
-  margin-top: 40px;
-}
-.btn-fetch{
-  margin-top:40px;
-}
-.val{
-  margin-top: 40px;
-}
-.Heading{
-  color: white;
-}
-.Login{
-  margin-top:40px;
-}
-.Login-Title{
-  margin-bottom: 15px;
-  color: white;
-}
-.acc{
-  margin-top: 15px;
-  color: white;
-}
-
-.signup-link {
-  color: #ffcc00; 
-  font-weight: bold;
-  text-decoration: none;
-  transition: 0.3s ease-in-out;
-}
-
-.signup-link:hover {
-  text-decoration: underline;
-  color: #ffd71f; 
-}
-.Signup{
-  margin-top: 40px;
-}
-.Signup-Heading{
-  margin-bottom: 15px;
-  color: white;
-}
-.Report-Data{
-  margin-top: 15px;
-  margin-bottom: 35px;
-  color: white;
-}
-.Report-Heading{
-  color: white;
-}
-.Pdf{
-  margin-right: 10px;
-}
-.Excel{
-  margin-left: 10px;
-  margin-right: 10px;
-}
-.Docx{
-  margin-left: 10px;
-}
-.Download{
-  margin-top: 15px;
-  color: white;
-  margin-bottom: 15px;
-}
-.Download-Heading{
-  margin-bottom: 15px;
 }

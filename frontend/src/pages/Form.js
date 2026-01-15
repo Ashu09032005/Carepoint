@@ -1,97 +1,167 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import "../index.css";
+
 function Form() {
+  const navigate = useNavigate();
+
+  // 🔹 Get logged-in student from localStorage
+  const student = JSON.parse(localStorage.getItem("student")); 
+  console.log(student);
+  // student = { regNo, name, token }
+
   const [formData, setFormData] = useState({
-    regNo: "",
-    name: "",
-    block: "",
-    roomNo: "",
-    workType: "electrical",
-    category: "requisition",
-    comments: "",
+    workType: "Electrical", // default option
+    description: "",
     proof: null,
   });
-  const[selectedFile,setselectedFile]=useState(null);
 
+  // 🔹 Handle text input changes
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  // 🔹 Handle file uploads
   const handleFileChange = (e) => {
-    setFormData({...formData,proof:e.target.files[0]});
+    setFormData({ ...formData, proof: e.target.files[0] });
   };
 
+  // 🔹 Handle logout
+  const handleLogout = () => {
+    localStorage.removeItem("student");
+    alert("You have been logged out successfully!");
+    navigate("/login");
+  };
+
+  // 🔹 Submit form
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    if (!student) {
+      alert("Please login first!");
+      navigate("/login");
+      return;
+    }
+
     const formDataToSend = new FormData();
-    for(const key in formData){
-      formDataToSend.append(key,formData[key]);
+    formDataToSend.append("regNo", student.regNo);
+    formDataToSend.append("name", student.name);
+    formDataToSend.append("block", formData.block || "");
+    formDataToSend.append("roomNo", formData.roomNo || "");
+    formDataToSend.append("workType", formData.workType);
+    formDataToSend.append("comments", formData.description);
+    if (formData.proof) {
+      formDataToSend.append("proof", formData.proof);
     }
-    console.log("FormData being sent:", Object.fromEntries(formDataToSend.entries()));
+
     try {
-        const response = await fetch("http://localhost:5000/submit-request", {
-            method: "POST",
-            body: formDataToSend
-        });
+      const response = await fetch("http://localhost:5000/submit-request", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${student.token}`,
+        },
+        body: formDataToSend,
+      });
 
-        const data = await response.json();
-        if (response.ok) {
-            alert("✅ Form submitted successfully!");
-            console.log("Uploaded Proof Path:", data.proof);
-        } else {
-            alert("❌ Error submitting form");
-        }
+      const data = await response.json();
+
+      if (response.ok) {
+        alert("✅ Complaint submitted successfully!");
+        setFormData({ workType: "Electrical", description: "", proof: null });
+      } else {
+        alert(`❌ Error: ${data.error || "Failed to submit"}`);
+      }
     } catch (error) {
-        console.error("❌ Failed to submit form:", error);
+      console.error("❌ Failed to submit form:", error);
+      alert("Server error. Try again later.");
     }
-    setFormData({ regNo: "", name: "", block: "", roomNo: "", workType: "electrical", category: "requisition", comments: "" ,proof:null});
-};
+  };
 
-  
   return (
-    <>
-    <nav className="navbar">
-    <div className="logo-space"><img src="/logo1.png" alt="Care Point Logo" className="logo" width={150} height={100}/></div>
+    <div className="home-wrapper">
+      {/* 🔹 Navbar */}
+      <nav className="navbar">
+        <div className="logo-space">
+          <img src="/logo1.png" alt="Care Point Logo" className="logo" width={150} height={100} />
+        </div>
         <div className="nav-links">
           <a href="/">Home</a>
-          <a href="/form">Student Form</a>
-          <a href="/reports">Reports</a>
-          <a href="/contact">Contact</a>
+          <a href="/form">Submit Complaint</a>
+          <a href="/student/reports">My Complaints</a>
+          <a href="/mailto:support@carepoint.com">Contact</a>
+
+          {/* ✅ Show logout only if student is logged in */}
+          {student && (
+            <button onClick={handleLogout} className="logout-btn">Logout</button>
+          )}
         </div>
       </nav>
-    <div className="Form-div">
-      <div className="form-title">Student Maintenance Form</div>
-      <form onSubmit={handleSubmit}>
-        <input name="regNo" value={formData.regNo} placeholder="Registration Number" onChange={handleChange} required />
-        <input name="name" value={formData.name} placeholder="Name" onChange={handleChange} required />
-        <input name="block" value={formData.block} placeholder="Block" onChange={handleChange} required />
-        <input name="roomNo" value={formData.roomNo} placeholder="Room Number" onChange={handleChange} required />
-        
-        <select name="workType" value={formData.workType} onChange={handleChange}>
-          {["electrical", "plumbing", "cleaning", "internet", "laundry", "other"].map((type) => (
-            <option key={type} value={type}>{type}</option>
-          ))}
-        </select>
 
-        <select name="category" value={formData.category} onChange={handleChange}>
-          {["suggestions", "improvements", "feedbacks", "requisition"].map((cat) => (
-            <option key={cat} value={cat}>{cat}</option>
-          ))}
-        </select>
+      {/* 🔹 Form Section */}
+      <div className="Form-div">
+        <div className="form-title">Maintenance Complaint Form</div>
 
-        <textarea name="comments" value={formData.comments} placeholder="Comments" onChange={handleChange}></textarea>
-        <input name ="proof" type="file" onChange={handleFileChange} />
-        
-        <button type="submit">Submit</button>
-      </form>
-    </div>
-    <footer className="footer"><p>
-      &copy; 2025 Care Point™ | All Rights Reserved | Contact:{" "}
-      <a href="mailto:support@carepoint.com" className="footer-link">support@carepoint.com</a>
-      </p></footer>
-    </>
+        {student ? (
+          <form onSubmit={handleSubmit}>
+            <div className="student-info">
+              <p><strong>Reg No:</strong> {student.regNo}</p>
+              <p><strong>Name:</strong> {student.name}</p>
+            </div>
+
+            <input
+              type="text"
+              name="block"
+              value={formData.block || ""}
+              placeholder="Enter Block"
+              onChange={handleChange}
+              required
+            />
+
+            <input
+              type="text"
+              name="roomNo"
+              value={formData.roomNo || ""}
+              placeholder="Enter Room No"
+              onChange={handleChange}
+              required
+            />
+
+            <select name="workType" value={formData.workType} onChange={handleChange} required>
+              {["Electrical", "Plumbing", "Laundry", "Internet", "Other"].map((type) => (
+                <option key={type} value={type}>{type}</option>
+              ))}
+            </select>
+
+            <textarea
+              name="description"
+              value={formData.description}
+              placeholder="Describe your issue"
+              onChange={handleChange}
+              required
+            ></textarea>
+
+            <input name="proof" type="file" accept="image/*" onChange={handleFileChange} />
+            <button type="submit">Submit</button>
+          </form>
+        ) : (
+          <p style={{ color: "red" }}>Please login first to submit a complaint.</p>
+        )}
+      </div>
+
+      <div className="page-container">
+  {/* your existing content */}
+
+  <footer className="footer">
+    <p>
+      © 2025 Care Point™ | All Rights Reserved | Contact:{" "}
+      <a href="mailto:support@carepoint.com" className="footer-link">
+        support@carepoint.com
+      </a>
+    </p>
+  </footer>
+</div>
+</div>
   );
 }
-
 
 export default Form;
